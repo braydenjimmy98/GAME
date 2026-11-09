@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#24125c">
+  <meta name="description" content="A beautiful, private place to keep your notes, links, ideas, and tasks.">
+  <title>DataVault — Your ideas, beautifully kept</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="ambient ambient-three" aria-hidden="true"></div>
+
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="DataVault home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>DataVault</span>
+      </a>
+      <span class="privacy-note"><span class="privacy-dot" aria-hidden="true"></span>Private by design · saved on this device</span>
+    </header>
+
+    <section class="hero" id="top" aria-labelledby="page-title">
+      <p class="eyebrow"><span aria-hidden="true">✧</span> YOUR PERSONAL SPACE</p>
+      <h1 id="page-title">Your ideas,<br><span>beautifully kept.</span></h1>
+      <p class="hero-copy">A little space for everything worth remembering.</p>
+    </section>
+
+    <section class="form-panel glass-panel" aria-labelledby="form-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">CAPTURE A THOUGHT</p>
+          <h2 id="form-heading">Add to your vault</h2>
+        </div>
+        <span class="form-sparkle" aria-hidden="true">✧</span>
+      </div>
+
+      <form id="entry-form" novalidate>
+        <div class="form-grid">
+          <label class="field title-field" for="entry-title">
+            <span>Title <span class="required-mark" aria-hidden="true">*</span></span>
+            <input id="entry-title" name="title" type="text" placeholder="Give it a memorable name" maxlength="120" autocomplete="off" aria-describedby="title-error" required>
+            <span class="field-error" id="title-error" role="alert" hidden>Please add a title so you can find this later.</span>
+          </label>
+          <label class="field" for="entry-category">
+            <span>Category</span>
+            <span class="select-wrap">
+              <select id="entry-category" name="category">
+                <option value="Notes">Notes</option>
+                <option value="Links">Links</option>
+                <option value="Ideas">Ideas</option>
+                <option value="Tasks">Tasks</option>
+              </select>
+            </span>
+          </label>
+          <label class="field details-field" for="entry-details">
+            <span>Details <span class="optional-label">· optional</span></span>
+            <textarea id="entry-details" name="details" rows="3" placeholder="Write a few details, paste a link, or get that idea out of your head…" maxlength="5000"></textarea>
+          </label>
+        </div>
+        <div class="form-footer">
+          <p class="form-hint"><span aria-hidden="true">✦</span> Your entries never leave this browser.</p>
+          <div class="form-actions">
+            <button class="button button-quiet" id="cancel-edit" type="button" hidden>Cancel</button>
+            <button class="button button-primary" id="submit-button" type="submit"><span aria-hidden="true">＋</span><span id="submit-label">Add to vault</span></button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="vault-section" aria-labelledby="vault-heading">
+      <div class="vault-heading-row">
+        <div>
+          <p class="eyebrow">YOUR COLLECTION</p>
+          <h2 id="vault-heading">The vault <span class="entry-count" id="entry-count">0</span></h2>
+        </div>
+        <div class="data-actions">
+          <button class="button button-quiet" id="export-button" type="button" title="Download all entries as a JSON file"><span aria-hidden="true">↗</span> Export JSON</button>
+          <button class="button button-quiet" id="import-button" type="button" title="Import entries from a JSON file"><span aria-hidden="true">↙</span> Import JSON</button>
+          <input id="import-file" type="file" accept=".json,application/json" hidden>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-box" for="search-input">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input id="search-input" type="search" placeholder="Search your vault…" autocomplete="off">
+          <kbd>⌘ K</kbd>
+        </label>
+        <div class="filter-list" role="group" aria-label="Filter by category">
+          <button class="filter-button is-active" type="button" data-category="All" aria-pressed="true">All</button>
+          <button class="filter-button" type="button" data-category="Notes" aria-pressed="false">Notes</button>
+          <button class="filter-button" type="button" data-category="Links" aria-pressed="false">Links</button>
+          <button class="filter-button" type="button" data-category="Ideas" aria-pressed="false">Ideas</button>
+          <button class="filter-button" type="button" data-category="Tasks" aria-pressed="false">Tasks</button>
+        </div>
+      </div>
+
+      <div class="entry-grid" id="entry-list" aria-live="polite" aria-busy="false"></div>
+      <div class="empty-state glass-panel" id="empty-state">
+        <span class="empty-icon" aria-hidden="true">✧</span>
+        <h3 id="empty-title">Your vault is a blank canvas.</h3>
+        <p id="empty-copy">Add your first note, link, idea, or task to get started.</p>
+      </div>
+    </section>
+
+    <footer class="page-footer"><span>Made for the things you don't want to forget.</span><span>✦ &nbsp;Just you and your browser.</span></footer>
+    <p class="toast" id="toast" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>
